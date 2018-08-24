@@ -2,8 +2,6 @@ function [fig,Axes] = plot_scroll(varargin)
 %% plot_scroll
 % draw multiple plots with subplot function with scroll bar
 % Input parameters
-% - NumAxis : number of axis per window. Large value will make smaller
-% subplots and show more plots in same window.
 % - PlotFunction : default = @plot. 
 % Output parameters
 % - fig : figure handle
@@ -26,17 +24,23 @@ CONST.lmargin = (1 - CONST.length)/2;
 %% Parse varargin
 numArgin = length(varargin);
 if numArgin == 1 % data only
-    if ~isnumeric(rawdata)
+    if ~isnumeric(varargin{1})
         error('Only numeric 2d numeric data can be plotted');
     end
-    if numel(size(rawdata)) >= 3
+    if numel(size(varargin)) >= 3
         error('Data dimension must be 2');
     end
     data = cell2mat(varargin);
 elseif rem(numArgin,2) == 1 % n*pairs + data == odd number
+    if ~isnumeric(varargin{1})
+        error('Only numeric 2d numeric data can be plotted');
+    end
+    if numel(size(varargin)) >= 3
+        error('Data dimension must be 2');
+    end
     data = cell2mat(varargin(1));
     for pair = reshape(varargin(2:end),2,[])
-        pname = lower(pair{1}); % case insensitive
+        pname = pair{1};
         if any(strcmp(pname,fieldnames(Options)))
             Options.(pname) = pair{2};
         else

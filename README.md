@@ -18,7 +18,6 @@ Possible Name Value pairs are below
 
 Name | Value | Default | Meaning
 ------------ | ------------- | -------------| -------------
-'NumAxis'| integers >= 1 | 2 |Number of axes to show in a single screen. Large number will result small plots but shows more plots in one screen.
 'PlotFunction' | function handle | @plot | Plotting function to use
 
 # License 
